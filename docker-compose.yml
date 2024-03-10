@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  web:
+    image: nginx
+  
+    ports:
+    - "80:80"
+
+    volumes:
+    - ./App:/usr/share/nginx/html
+
+  db:
+    image: mysql
+    ports:
+    - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: yamanverma
+
+  admin:
+    image: phpmyadmin
+
+    ports:
+    - "8080:80"
+
+    depends_on:
+    - db
+
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: yamanverma
+
+
+  
